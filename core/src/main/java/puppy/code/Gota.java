@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.Gdx;
 
-public abstract class Gota {
+public abstract class Gota implements Colisionable {
     protected Rectangle area;
     protected Texture textura;
 
@@ -27,23 +27,30 @@ public abstract class Gota {
     }
 
     protected void mover() {
+
         area.y -= 300 * Gdx.graphics.getDeltaTime();
     }
 
     protected boolean haCaido() {
+
         return area.y + area.height < 0;
     }
 
-    protected boolean colisionaCon(Tarro tarro) {
-        return area.overlaps(tarro.getArea());
+    // Implementación de Colisionable
+    @Override
+    public Rectangle getArea() {
+        return area;
+    }
+
+    @Override
+    public boolean colisionaCon(Colisionable otro) {
+        return area.overlaps(otro.getArea());
     }
 
     public void dibujar(SpriteBatch batch) {
         batch.draw(textura, area.x, area.y);
     }
 
-    // Método abstracto: comportamiento específico
+    // Método abstracto
     protected abstract void aplicarEfecto(Tarro tarro);
-
-    public Rectangle getArea() { return area; }
 }
