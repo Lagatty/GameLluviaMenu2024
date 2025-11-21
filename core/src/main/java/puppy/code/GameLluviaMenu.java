@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 		public void create() {
 			batch = new SpriteBatch();
 			font = new BitmapFont(); // use libGDX's default Arial font
-			this.setScreen(new MainMenuScreen(this));
+            this.setScreen(MainMenuScreen.getInstance(this));
 		}
 
 		public void render() {
@@ -40,6 +40,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 		public void setHigherScore(int higherScore) {
 			this.higherScore = higherScore;
 		}
-		
+
 
 	}

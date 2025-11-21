@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 
 public class MainMenuScreen implements Screen {
-
+    private static MainMenuScreen instancia;
 	final GameLluviaMenu game;
 	private SpriteBatch batch;
 	private BitmapFont font;
@@ -22,6 +22,20 @@ public class MainMenuScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
 	}
+
+    public static MainMenuScreen getInstance(final GameLluviaMenu game) {
+        if (instancia == null) {
+            instancia = new MainMenuScreen(game);
+        }
+        return instancia;
+    }
+
+    public static void resetearInstancia() {
+        if (instancia != null) {
+            instancia.dispose();
+            instancia = null;
+        }
+    }
 
 	@Override
 	public void render(float delta) {
@@ -38,7 +52,7 @@ public class MainMenuScreen implements Screen {
 		batch.end();
 
 		if (Gdx.input.isTouched()) {
-			game.setScreen(new GameScreen(game));
+            game.setScreen(MainMenuScreen.getInstance(game));
 			dispose();
 		}
 	}
@@ -46,37 +60,37 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
