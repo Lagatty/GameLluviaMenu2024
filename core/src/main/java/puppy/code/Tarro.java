@@ -20,10 +20,14 @@ public class Tarro implements Colisionable {
 	   private int tiempoHeridoMax=50;
 	   private int tiempoHerido;
 
+        // Patrón Strategy: referencia a la estrategia de movimiento GM2.3
+       private EstrategiaMovimiento estrategiaMovimiento;
 
 	   public Tarro(Texture tex, Sound ss) {
 		   bucketImage = tex;
 		   sonidoHerido = ss;
+           // Por defecto, usa movimiento por teclado
+           estrategiaMovimiento = new movimientoTeclado ();
 	   }
 
 		public int getVidas() {
@@ -77,12 +81,14 @@ public class Tarro implements Colisionable {
         }
     }
 
+    // Patrón Strategy: delega el movimiento a la estrategia actual
     public void actualizarMovimiento() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) bucket.x -= velx * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += velx * Gdx.graphics.getDeltaTime();
+        estrategiaMovimiento.mover(bucket, velx);
+    }
 
-        if (bucket.x < 0) bucket.x = 0;
-        if (bucket.x > 800 - 64) bucket.x = 800 - 64;
+    // Método para cambiar la estrategia de movimiento en tiempo de ejecución
+    public void setEstrategiaMovimiento(EstrategiaMovimiento estrategia) {
+        this.estrategiaMovimiento = estrategia;
     }
 
     public void destruir() {
