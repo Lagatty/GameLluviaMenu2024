@@ -86,7 +86,7 @@ public class Tarro implements Colisionable {
         estrategiaMovimiento.mover(bucket, velx);
     }
 
-    // Método para cambiar la estrategia de movimiento en tiempo de ejecución
+    // Metodo para cambiar la estrategia de movimiento en tiempo de ejecución
     public void setEstrategiaMovimiento(EstrategiaMovimiento estrategia) {
         this.estrategiaMovimiento = estrategia;
     }
